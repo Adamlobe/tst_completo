@@ -3,7 +3,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import io
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 @app.route('/')
 def index():
@@ -15,7 +15,7 @@ def generate_pdf():
     data = request.form
 
     # Verificando se todas as chaves esperadas estão presentes
-    required_keys = ['data', 'placa', 'Freios', 'Luzes', 'Pneus', 'Oleo', 'Cinto de Segurança']
+    required_keys = ['data', 'placa', 'Freios', 'Luzes', 'Pneus', 'Óleo', 'CintoDeSeguranca']
     for key in required_keys:
         if key not in data:
             return f"Erro: Campo '{key}' está faltando no formulário.", 400
@@ -27,12 +27,17 @@ def generate_pdf():
     c.drawString(100, 730, f"Data: {data['data']}")
     c.drawString(100, 710, f"Placa do Caminhão: {data['placa']}")
 
-    # Exemplo de itens do checklist
-    checklist_items = ['Freios', 'Luzes', 'Pneus', 'Oleo', 'Cinto de Segurança']
-
+    # Exibindo os itens do checklist padrão
+    default_items = ['Freios', 'Luzes', 'Pneus', 'Óleo', 'CintoDeSeguranca']
     y = 670
-    for item in checklist_items:
+    for item in default_items:
         c.drawString(100, y, f"{item}: {data[item]}")
+        y -= 20
+
+    # Exibindo os itens do checklist flexíveis
+    flexible_items = zip(data.getlist('item[]'), data.getlist('conforme[]'))
+    for item, conforme in flexible_items:
+        c.drawString(100, y, f"{item}: {conforme}")
         y -= 20
 
     c.save()

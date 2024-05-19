@@ -1,8 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checklist de Segurança de Caminhão</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
   <h1>Checklist de Segurança de Caminhão</h1>
@@ -13,38 +15,56 @@
     <label for="placa">Placa do Caminhão:</label>
     <input type="text" id="placa" name="placa" required><br><br>
     
-    <!-- Campos para o checklist -->
-    <label for="Freios">Freios:</label>
-    <select id="Freios" name="Freios" required>
-      <option value="Conforme">Conforme</option>
-      <option value="Não Conforme">Não Conforme</option>
-    </select><br><br>
-    
-    <label for="Luzes">Luzes:</label>
-    <select id="Luzes" name="Luzes" required>
-      <option value="Conforme">Conforme</option>
-      <option value="Não Conforme">Não Conforme</option>
-    </select><br><br>
-    
-    <label for="Pneus">Pneus:</label>
-    <select id="Pneus" name="Pneus" required>
-      <option value="Conforme">Conforme</option>
-      <option value="Não Conforme">Não Conforme</option>
-    </select><br><br>
-    
-    <label for="Oleo">Óleo:</label>  <!-- Certifique-se de que o nome do campo é "Oleo" sem acento -->
-    <select id="Oleo" name="Oleo" required>
-      <option value="Conforme">Conforme</option>
-      <option value="Não Conforme">Não Conforme</option>
-    </select><br><br>
-    
-    <label for="Cinto de Segurança">Cinto de Segurança:</label>  <!-- Remova espaços e use sublinhado se necessário -->
-    <select id="Cinto de Segurança" name="Cinto de Segurança" required>
-      <option value="Conforme">Conforme</option>
-      <option value="Não Conforme">Não Conforme</option>
-    </select><br><br>
+    <!-- Campos para os itens do checklist padrão -->
+    <div id="default-items">
+      <div class="item">
+        <label for="Freios">Freios:</label>
+        <select name="Freios" required>
+          <option value="Conforme">Conforme</option>
+          <option value="Não Conforme">Não Conforme</option>
+        </select><br><br>
+      </div>
+      <div class="item">
+        <label for="Luzes">Luzes:</label>
+        <select name="Luzes" required>
+          <option value="Conforme">Conforme</option>
+          <option value="Não Conforme">Não Conforme</option>
+        </select><br><br>
+      </div>
+      <div class="item">
+        <label for="Pneus">Pneus:</label>
+        <select name="Pneus" required>
+          <option value="Conforme">Conforme</option>
+          <option value="Não Conforme">Não Conforme</option>
+        </select><br><br>
+      </div>
+      <div class="item">
+        <label for="Óleo">Óleo:</label>
+        <select name="Óleo" required>
+          <option value="Conforme">Conforme</option>
+          <option value="Não Conforme">Não Conforme</option>
+        </select><br><br>
+      </div>
+      <div class="item">
+        <label for="CintoDeSeguranca">Cinto de Segurança:</label>
+        <select name="CintoDeSeguranca" required>
+          <option value="Conforme">Conforme</option>
+          <option value="Não Conforme">Não Conforme</option>
+        </select><br><br>
+      </div>
+    </div>
+
+    <!-- Campos para os itens do checklist flexíveis -->
+    <div id="flexible-items">
+      <!-- Aqui serão adicionados os itens flexíveis via JavaScript -->
+    </div>
+
+    <!-- Botão para adicionar mais itens -->
+    <input type="button" value="Adicionar Item" onclick="addField()"><br><br>
 
     <input type="submit" value="Gerar PDF">
   </form>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
