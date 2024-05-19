@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checklist de Segurança de Caminhão</title>
+</head>
+<body>
+  <h1>Checklist de Segurança de Caminhão</h1>
+  <form action="/generate_pdf" method="post">
+    <label for="data">Data:</label>
+    <input type="date" id="data" name="data" required><br><br>
+    
+    <label for="placa">Placa do Caminhão:</label>
+    <input type="text" id="placa" name="placa" required><br><br>
+    
+    <!-- Campos para o checklist -->
+    <label for="Freios">Freios:</label>
+    <select id="Freios" name="Freios" required>
+      <option value="Conforme">Conforme</option>
+      <option value="Não Conforme">Não Conforme</option>
+    </select><br><br>
+    
+    <label for="Luzes">Luzes:</label>
+    <select id="Luzes" name="Luzes" required>
+      <option value="Conforme">Conforme</option>
+      <option value="Não Conforme">Não Conforme</option>
+    </select><br><br>
+    
+    <label for="Pneus">Pneus:</label>
+    <select id="Pneus" name="Pneus" required>
+      <option value="Conforme">Conforme</option>
+      <option value="Não Conforme">Não Conforme</option>
+    </select><br><br>
+    
+    <label for="Oleo">Óleo:</label>  <!-- Certifique-se de que o nome do campo é "Oleo" sem acento -->
+    <select id="Oleo" name="Oleo" required>
+      <option value="Conforme">Conforme</option>
+      <option value="Não Conforme">Não Conforme</option>
+    </select><br><br>
+    
+    <label for="Cinto de Segurança">Cinto de Segurança:</label>  <!-- Remova espaços e use sublinhado se necessário -->
+    <select id="Cinto de Segurança" name="Cinto de Segurança" required>
+      <option value="Conforme">Conforme</option>
+      <option value="Não Conforme">Não Conforme</option>
+    </select><br><br>
+
+    <input type="submit" value="Gerar PDF">
+  </form>
+</body>
+</html>
