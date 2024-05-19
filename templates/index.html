@@ -1,70 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checklist de Segurança de Caminhão</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checklist de Segurança de Caminhão</title>
+    <style>
+        /* Estilos para o cabeçalho */
+        #header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos para o campo de assinatura */
+        #assinatura {
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
 </head>
 <body>
-  <h1>Checklist de Segurança de Caminhão</h1>
-  <form action="/generate_pdf" method="post">
-    <label for="data">Data:</label>
-    <input type="date" id="data" name="data" required><br><br>
-    
-    <label for="placa">Placa do Caminhão:</label>
-    <input type="text" id="placa" name="placa" required><br><br>
-    
-    <!-- Campos para os itens do checklist padrão -->
-    <div id="default-items">
-      <div class="item">
+    <!-- Cabeçalho -->
+    <div id="header">
+        <h1>Checklist de Segurança de Caminhão</h1>
+    </div>
+
+    <!-- Formulário -->
+    <form action="/generate_pdf" method="post">
+        <!-- Campos para nome da empresa e CNPJ -->
+        <label for="nome_empresa">Nome da Empresa:</label>
+        <input type="text" id="nome_empresa" name="nome_empresa" required><br><br>
+        <label for="cnpj">CNPJ:</label>
+        <input type="text" id="cnpj" name="cnpj" required><br><br>
+
+        <!-- Campos para os itens do checklist padrão -->
+        <label for="data">Data:</label>
+        <input type="date" id="data" name="data" required><br><br>
+
+        <label for="placa">Placa do Caminhão:</label>
+        <input type="text" id="placa" name="placa" required><br><br>
+
         <label for="Freios">Freios:</label>
-        <select name="Freios" required>
-          <option value="Conforme">Conforme</option>
-          <option value="Não Conforme">Não Conforme</option>
+        <select id="Freios" name="Freios" required>
+            <option value="Conforme">Conforme</option>
+            <option value="Não Conforme">Não Conforme</option>
         </select><br><br>
-      </div>
-      <div class="item">
+
         <label for="Luzes">Luzes:</label>
-        <select name="Luzes" required>
-          <option value="Conforme">Conforme</option>
-          <option value="Não Conforme">Não Conforme</option>
+        <select id="Luzes" name="Luzes" required>
+            <option value="Conforme">Conforme</option>
+            <option value="Não Conforme">Não Conforme</option>
         </select><br><br>
-      </div>
-      <div class="item">
+
         <label for="Pneus">Pneus:</label>
-        <select name="Pneus" required>
-          <option value="Conforme">Conforme</option>
-          <option value="Não Conforme">Não Conforme</option>
+        <select id="Pneus" name="Pneus" required>
+            <option value="Conforme">Conforme</option>
+            <option value="Não Conforme">Não Conforme</option>
         </select><br><br>
-      </div>
-      <div class="item">
-        <label for="Óleo">Óleo:</label>
-        <select name="Óleo" required>
-          <option value="Conforme">Conforme</option>
-          <option value="Não Conforme">Não Conforme</option>
+
+        <label for="Oleo">Óleo:</label>
+        <select id="Oleo" name="Oleo" required>
+            <option value="Conforme">Conforme</option>
+            <option value="Não Conforme">Não Conforme</option>
         </select><br><br>
-      </div>
-      <div class="item">
+
         <label for="CintoDeSeguranca">Cinto de Segurança:</label>
-        <select name="CintoDeSeguranca" required>
-          <option value="Conforme">Conforme</option>
-          <option value="Não Conforme">Não Conforme</option>
+        <select id="CintoDeSeguranca" name="CintoDeSeguranca" required>
+            <option value="Conforme">Conforme</option>
+            <option value="Não Conforme">Não Conforme</option>
         </select><br><br>
-      </div>
-    </div>
 
-    <!-- Campos para os itens do checklist flexíveis -->
-    <div id="flexible-items">
-      <!-- Aqui serão adicionados os itens flexíveis via JavaScript -->
-    </div>
+        <!-- Campos para os itens do checklist flexíveis -->
+        <div id="flexible-items"></div>
 
-    <!-- Botão para adicionar mais itens -->
-    <input type="button" value="Adicionar Item" onclick="addField()"><br><br>
+        <!-- Botão para adicionar mais itens -->
+        <input type="button" value="Adicionar Item" onclick="addField()"><br><br>
 
-    <input type="submit" value="Gerar PDF">
-  </form>
+        <!-- Campo de assinatura -->
+        <div id="assinatura">
+            <label for="nome_assinatura">Nome para Assinatura:</label>
+            <input type="text" id="nome_assinatura" name="nome_assinatura" required><br><br>
+            <hr> <!-- Linha de assinatura -->
+        </div>
 
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+        <input type="submit" value="Gerar PDF">
+    </form>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

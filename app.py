@@ -3,7 +3,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import io
 
-app = Flask(__name__, static_url_path='/static')
+app = Flask(__name__)
 
 @app.route('/')
 def index():
@@ -15,7 +15,8 @@ def generate_pdf():
     data = request.form
 
     # Verificando se todas as chaves esperadas estão presentes
-    required_keys = ['data', 'placa', 'Freios', 'Luzes', 'Pneus', 'Óleo', 'CintoDeSeguranca']
+    required_keys = ['data', 'placa', 'Freios', 'Luzes', 'Pneus', 'Oleo', 'CintoDeSeguranca',
+                     'nome_empresa', 'cnpj', 'nome_assinatura']
     for key in required_keys:
         if key not in data:
             return f"Erro: Campo '{key}' está faltando no formulário.", 400
@@ -26,10 +27,12 @@ def generate_pdf():
     c.drawString(100, 750, "Checklist de Segurança de Caminhão")
     c.drawString(100, 730, f"Data: {data['data']}")
     c.drawString(100, 710, f"Placa do Caminhão: {data['placa']}")
+    c.drawString(100, 690, f"Nome da Empresa: {data['nome_empresa']}")
+    c.drawString(100, 670, f"CNPJ: {data['cnpj']}")
 
     # Exibindo os itens do checklist padrão
-    default_items = ['Freios', 'Luzes', 'Pneus', 'Óleo', 'CintoDeSeguranca']
-    y = 670
+    default_items = ['Freios', 'Luzes', 'Pneus', 'Oleo', 'CintoDeSeguranca']
+    y = 650
     for item in default_items:
         c.drawString(100, y, f"{item}: {data[item]}")
         y -= 20
@@ -39,6 +42,10 @@ def generate_pdf():
     for item, conforme in flexible_items:
         c.drawString(100, y, f"{item}: {conforme}")
         y -= 20
+
+    # Adicionando campo de assinatura
+    c.drawString(100, 50, f"Assinatura: {data['nome_assinatura']}")
+    c.line(100, 30, 300, 30)  # Linha de assinatura
 
     c.save()
     pdf_buffer.seek(0)
